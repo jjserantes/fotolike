@@ -5,6 +5,7 @@ if (!isset($_SESSION["idusuario"])){
     exit();
 }
 if(isset($_GET["idfoto"])){
+    try{
     include("conexiondb.php");
     $sql="INSERT INTO likes (idfoto, idusuario) VALUES (:idfoto, :idusuario)";
     $stm=$conexion->prepare($sql);
@@ -13,6 +14,10 @@ if(isset($_GET["idfoto"])){
     $stm->execute();
     header("Location: index.php");
     exit();
+}   catch(Exception $e){
+    echo "Error al dar like";
+    exit();
+}
 }
 
 ?>
